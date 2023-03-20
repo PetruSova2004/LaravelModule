@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Modules\Pub\Index\Controllers\Api;
+
+use App\Modules\Pub\Index\Models\Index;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class IndexController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Create of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * StoreService a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Modules\Pub\Index\Models\Index  $index
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Index $index)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Modules\Pub\Index\Models\Index  $index
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Index $index)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Modules\Pub\Index\Models\Index  $index
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Index $index)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Modules\Pub\Index\Models\Index  $index
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Index $index)
+    {
+        //
+    }
+}
