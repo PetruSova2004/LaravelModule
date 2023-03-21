@@ -38,18 +38,22 @@
                                             <th style="width: 30px">#</th>
                                             <th>Наименование</th>
                                             <th>Под Категория</th>
-                                            <th>Теги</th>
-                                            <th>Дата</th>
+                                            <th>Цена</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @php($subCategories = \App\Facades\IndexService::getJsonAllSubCategories())
                                         @foreach($products as $product)
                                             <tr>
                                                 <td>{{ $product->id }}</td>
                                                 <td>{{ $product->title }}</td>
-
-                                                <td>{{ $product->created_at }}</td>
+                                                @foreach($subCategories as $subCategory)
+                                                    @if($product->subcategory_id == $subCategory->id)
+                                                        <td>{{ $subCategory->title }}</td>
+                                                    @endif
+                                                @endforeach
+                                                <td>${{ $product->price }}</td>
 {{--                                                <td>--}}
 {{--                                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"--}}
 {{--                                                       class="btn btn-info btn-sm float-left mr-1">--}}
@@ -78,7 +82,7 @@
                             @endif
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer clearfix">
+                        <div class="card-footer clearfix">x
                         </div>
                     </div>
                     <!-- /.card -->

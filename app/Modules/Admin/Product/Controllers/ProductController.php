@@ -2,12 +2,20 @@
 
 namespace App\Modules\Admin\Product\Controllers;
 
+use App\Facades\ReceivingService;
 use App\Modules\Admin\Product\Models\Product;
+use App\Modules\Pub\Product\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+
+    public function __construct(ProductService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $x = ReceivingService::getJsonAllSubCategories();
+        dd($x);
+        $products = $this->service->getJsonAllProducts();
+        $categories = '';
         return view('Admin.Product.index', compact('products'));
     }
 

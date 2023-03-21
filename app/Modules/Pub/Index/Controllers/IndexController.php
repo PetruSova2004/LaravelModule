@@ -3,6 +3,7 @@
 namespace App\Modules\Pub\Index\Controllers;
 
 use App\Modules\Pub\Index\Services\IndexService;
+use App\Modules\Pub\Index\Services\ReceivingService;
 use App\Services\LocaleTest\Locale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

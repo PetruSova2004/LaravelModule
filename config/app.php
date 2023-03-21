@@ -201,6 +201,8 @@ return [
         \App\Services\Localization\LocalizationServiceProvider::class,
 
         \App\Providers\IndexServiceProvider::class,
+        \App\Providers\ReceivingProvider::class,
+
 
 
 
@@ -221,6 +223,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
 
         'IndexService' => App\Facades\IndexService::class,
+        'ReceivingService' => App\Facades\ReceivingService::class,
 
     ])->toArray(),
 
