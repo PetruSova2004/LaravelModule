@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 class ReceivingService extends Facade
 {
+
     protected static function getFacadeAccessor()
     {
         return 'ReceivingService';

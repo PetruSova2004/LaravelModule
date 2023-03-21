@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Receiving;
 
 use App\Modules\Pub\Category\Models\Category;
 use App\Modules\Pub\Product\Models\Product;
