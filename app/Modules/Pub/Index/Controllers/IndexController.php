@@ -2,8 +2,8 @@
 
 namespace App\Modules\Pub\Index\Controllers;
 
+use App\Facades\ReceivingService;
 use App\Modules\Pub\Index\Services\IndexService;
-use App\Modules\Pub\Index\Services\ReceivingService;
 use App\Services\LocaleTest\Locale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,12 +26,12 @@ class IndexController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $newArrivalProducts = $this->service->getJsonNewProducts();
-        $featuredProducts = $this->service->getJsonFeaturedProducts();
-        $bestProducts = $this->service->getJsonBestProducts();
-        $topProducts = $this->service->getJsonTopProducts();
-        $categories = $this->service->getJsonAllCategories();
-        $subCategories = $this->service->getJsonAllSubCategories();
+        $newArrivalProducts = ReceivingService::getJsonNewProducts();
+        $featuredProducts = ReceivingService::getJsonFeaturedProducts();
+        $bestProducts = ReceivingService::getJsonBestProducts();
+        $topProducts = ReceivingService::getJsonTopProducts();
+        $categories = ReceivingService::getJsonAllCategories();
+        $subCategories = ReceivingService::getJsonAllSubCategories();
         $time = $this->service->getPresentTime();
 
         return view('Pub.index', compact('user', 'featuredProducts', 'categories', 'subCategories', 'newArrivalProducts', 'time', 'bestProducts', 'topProducts'));

@@ -5,38 +5,33 @@ namespace App\Services\Receiving;
 use App\Modules\Pub\Category\Models\Category;
 use App\Modules\Pub\Product\Models\Product;
 use App\Modules\Pub\SubCategory\Models\SubCategory;
-use App\Modules\Pub\User\Models\User;
 use App\Services\Response\ResponseServise;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\throwException;
+
 
 class ReceivingService
 {
-
-    private function getFeaturedProductsEn()
+    public function getProductsEn()
     {
-        $products = Product::where('id', '<=', 5)->get('*');
+        $products = Product::all();
 
         return $products;
     }
 
-    private function getFeaturedProductsRu()
+    public function getProductsRu()
     {
-        $products = DB::table('products_ru')->where('id', '<=', 5)->get('*');
+        $products = DB::table('products_ru')->select('*')->get();
 
         return $products;
     }
 
-    public function getJsonFeaturedProducts()
+    public function getJsonAllProducts()
     {
         if (App::getLocale() == 'en') {
-            $result = $this->getFeaturedProductsEn();
+            $result = $this->getProductsEn();
         } elseif (App::getLocale() == 'ru') {
-            $result = $this->getFeaturedProductsRu();
+            $result = $this->getProductsRu();
         }
 
         $productsJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
@@ -80,36 +75,6 @@ class ReceivingService
     }
 
 
-    private function getAllNewProductsEn()
-    {
-        $products = Product::orderByDesc('id')->take(4)->get();
-        return $products;
-    }
-
-    private function getAllNewProductsRu()
-    {
-        $products = DB::table('products_ru')->orderByDesc('id')->take(4)->get('*');
-        return $products;
-    }
-
-    public function getJsonNewProducts()
-    {
-        if (App::getLocale() == 'en') {
-            $result = $this->getAllNewProductsEn();
-        } elseif (App::getLocale() == 'ru') {
-            $result = $this->getAllNewProductsRu();
-        }
-
-        $categoriesJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
-            'items' => $result
-        ]));
-
-        $categories = $categoriesJson->data->items;
-
-        return $categories;
-    }
-
-
     private function getAllCategoriesEn()
     {
         $categories = Category::all();
@@ -128,6 +93,69 @@ class ReceivingService
             $result = $this->getAllCategoriesEn();
         } elseif (App::getLocale() == 'ru') {
             $result = $this->getAllCategoriesRu();
+        }
+
+        $categoriesJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
+            'items' => $result
+        ]));
+
+        $categories = $categoriesJson->data->items;
+
+        return $categories;
+    }
+
+
+    private function getFeaturedProductsEn()
+    {
+        $products = Product::where('id', '<=', 5)->get('*');
+
+        return $products;
+    }
+
+    private function getFeaturedProductsRu()
+    {
+        $products = DB::table('products_ru')->where('id', '<=', 5)->get('*');
+
+        return $products;
+    }
+
+    public function getJsonFeaturedProducts()
+    {
+        if (App::getLocale() == 'en') {
+            $result = $this->getFeaturedProductsEn();
+        } elseif (App::getLocale() == 'ru') {
+            $result = $this->getFeaturedProductsRu();
+        }
+
+        $productsJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
+            'items' => $result
+        ]));
+        // dd($productJson);
+
+        $products = $productsJson->data->items;
+
+        return $products;
+    }
+
+
+    private function getAllNewProductsEn()
+    {
+        $products = Product::orderByDesc('id')->take(4)->get();
+        return $products;
+    }
+
+    private function getAllNewProductsRu()
+    {
+        $products = DB::table('products_ru')->orderByDesc('id')->take(4)->get('*');
+        return $products;
+    }
+
+    public function getJsonNewProducts()
+    {
+        if (App::getLocale() == 'en') {
+            $result = $this->getAllNewProductsEn();
+        } elseif (App::getLocale() == 'ru') {
+            $result = $this->getAllNewProductsRu();
         }
 
         $categoriesJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
@@ -204,5 +232,8 @@ class ReceivingService
 
         return $products;
     }
+
+
+
 
 }

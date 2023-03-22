@@ -30,7 +30,7 @@
                     <div class="footer-section2 mb-3">
                         <h6 class="mb-3 text-uppercase">Shop Categories</h6>
                         <ul class="list-unstyled">
-                            @php($categories = \App\Facades\IndexService::getJsonAllCategories())
+                            @php($categories = \App\Facades\ReceivingService::getJsonAllCategories())
 
                             @foreach($categories as $category)
                                 <li class="mb-1"><a href="javascript:;"><i

@@ -25,7 +25,7 @@
                 <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="../../index3.html" class="nav-link">Home</a>
+                <a href={{route('admin.indices.index')}} class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -172,7 +172,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href={{route('admin.indices.index')}} class="nav-link">
                             <i class="nav-icon fas fa-home"></i>
                             <p>Главная</p>
                         </a>
@@ -194,7 +194,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href={{route('admin.products.create')}} class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новый Продукт</p>
                                 </a>

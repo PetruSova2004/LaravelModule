@@ -43,7 +43,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @php($subCategories = \App\Facades\IndexService::getJsonAllSubCategories())
                                         @foreach($products as $product)
                                             <tr>
                                                 <td>{{ $product->id }}</td>
@@ -54,24 +53,24 @@
                                                     @endif
                                                 @endforeach
                                                 <td>${{ $product->price }}</td>
-{{--                                                <td>--}}
-{{--                                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"--}}
-{{--                                                       class="btn btn-info btn-sm float-left mr-1">--}}
-{{--                                                        <i class="fas fa-pencil-alt"></i>--}}
-{{--                                                    </a>--}}
+                                                <td>
+                                                    <a href=""
+                                                       class="btn btn-info btn-sm float-left mr-1">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
 
-{{--                                                    <form--}}
-{{--                                                        action="{{ route('posts.destroy', ['post' => $post->id]) }}"--}}
-{{--                                                        method="post" class="float-left">--}}
-{{--                                                        @csrf--}}
-{{--                                                        @method('DELETE')--}}
-{{--                                                        <button type="submit" class="btn btn-danger btn-sm"--}}
-{{--                                                                onclick="return confirm('Подтвердите удаление')">--}}
-{{--                                                            <i--}}
-{{--                                                                class="fas fa-trash-alt"></i>--}}
-{{--                                                        </button>--}}
-{{--                                                    </form>--}}
-{{--                                                </td>--}}
+                                                    <form
+                                                        action={{route('admin.products.delete', ['product' => $product->id])}}
+                                                        method="post" class="float-left">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Подтвердите удаление')">
+                                                            <i
+                                                                class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -82,7 +81,7 @@
                             @endif
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer clearfix">x
+                        <div class="card-footer clearfix">
                         </div>
                     </div>
                     <!-- /.card -->
