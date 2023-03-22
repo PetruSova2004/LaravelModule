@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Product\Controllers;
 
 use App\Facades\ReceivingService;
+use App\Modules\Admin\Product\Services\AdminProductService;
 use App\Modules\Pub\Product\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
+    public function __construct(AdminProductService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,46 +49,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'descr' => 'required|min:10',
-            'sub_category' => 'Integer|required',
-            'price' => 'required|Integer',
-            'image' => 'required|Image',
-        ]);
-
-        $path = $request->file('image')->store('', ['disk' => 'new_products']);
-
-        if (Product::create([
-                'title' => $request->title,
-                'description' => $request->descr,
-                'img' => "assets/images/products/" . $path,
-                'price' => $request->price,
-                'subcategory_id' => $request->sub_category,
-            ]) &&
-            DB::table('products_ru')->insert([
-                'title' => $request->title_ru,
-                'description' => $request->descr_ru,
-                'img' => "assets/images/products/" . $path,
-                'price' => $request->price,
-                'subcategory_id' => $request->sub_category,
-            ])) {
-
-            $last_en = Product::orderBy('id', 'desc')->first();
-            $last_ru = DB::table('products_ru')->orderByDesc('id')->first();
-//            dd($last_en);
-
-            if (DB::table('binder_product_en_ru')->insert([
-                'en_product_id' => $last_en->id,
-                'ru_product_id' => $last_ru->id,
-            ])) {
-                return redirect()->route('admin.products.index')->with('success', 'Product was added with success');
-            }
-        } else {
-            return redirect()->back()->with('error', 'Something goes wrong');
-        }
-
-
+        return $this->service->storeProduct($request);
     }
 
     /**
@@ -103,7 +71,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $subCategories = ReceivingService::getJsonAllSubCategories();
+
+        $binder_ru = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
+        $ru_product = DB::table('products_ru')->where('id', $binder_ru->ru_product_id)->first();
+//        dd($ru_product);
+
+        return view('Admin.Product.edit', compact('subCategories', 'product', 'ru_product'));
     }
 
     /**
@@ -115,7 +89,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        return $this->service->updateProduct($request, $product);
     }
 
     /**
@@ -126,15 +100,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-//        dd($product->id);
-        $item = DB::table('products')->delete($product->id);
-        $item_ru = DB::table('products_ru')->delete($product->id);
-//        dd($item_ru);
-        if ($item_ru && $item) {
-            return redirect()->route('admin.products.index')->with('success', 'Продукт был удален');
-        } else {
-            return redirect()->back()->with('error', 'Невозможно удалить продукт');
-        }
-
+        return $this->service->destroyProduct($product);
     }
 }

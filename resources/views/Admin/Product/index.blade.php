@@ -29,7 +29,8 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="" class="btn btn-primary mb-3">Добавить статью</a>
+                            <a class="btn btn-primary mb-3" href={{route('admin.products.create')}} >Добавить
+                                Продукт</a>
                             @if (count($products))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover text-nowrap">
@@ -54,8 +55,8 @@
                                                 @endforeach
                                                 <td>${{ $product->price }}</td>
                                                 <td>
-                                                    <a href=""
-                                                       class="btn btn-info btn-sm float-left mr-1">
+                                                    <a class="btn btn-info btn-sm float-left mr-1"
+                                                       href={{route('admin.products.edit', ['product' => $product->id])}}>
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
