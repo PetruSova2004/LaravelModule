@@ -66,7 +66,17 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'subcategory_id' => $request->sub_category,
             ])) {
-            return redirect()->route('admin.products.index')->with('success', 'Product was added with success');
+
+            $last_en = Product::orderBy('id', 'desc')->first();
+            $last_ru = DB::table('products_ru')->orderByDesc('id')->first();
+//            dd($last_en);
+
+            if (DB::table('binder_product_en_ru')->insert([
+                'en_product_id' => $last_en->id,
+                'ru_product_id' => $last_ru->id,
+            ])) {
+                return redirect()->route('admin.products.index')->with('success', 'Product was added with success');
+            }
         } else {
             return redirect()->back()->with('error', 'Something goes wrong');
         }
