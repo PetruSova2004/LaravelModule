@@ -22,7 +22,8 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu" data-enable-remember="true" href="#" role="button"><i
+                        class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href={{route('admin.indices.index')}} class="nav-link">Home</a>
@@ -212,13 +213,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href={{route('admin.categories.index')}} class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Список категорий</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href={{route('admin.categories.create')}} class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Новая категория</p>
                                 </a>
@@ -255,11 +256,11 @@
                         </div>
                     @endif
 
-                        @if (session()->has('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -301,13 +302,13 @@
 
 <script>
     ClassicEditor
-        .create( document.querySelector( '#content' ), {
+        .create(document.querySelector('#content'), {
             ckfinder: {
                 uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
             },
             image: {
                 // You need to configure the image toolbar, too, so it uses the new style buttons.
-                toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
+                toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
 
                 styles: [
                     // This option is equal to a situation where no style is applied.
@@ -350,18 +351,18 @@
                     'mergeTableCells'
                 ]
             },
-        } )
-        .catch( function( error ) {
-            console.error( error );
-        } );
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
 
     ClassicEditor
-        .create( document.querySelector( '#description' ), {
-            toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
-        } )
-        .catch( function( error ) {
-            console.error( error );
-        } );
+        .create(document.querySelector('#description'), {
+            toolbar: ['heading', '|', 'bold', 'italic', '|', 'undo', 'redo']
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
 </script>
 
 </body>
