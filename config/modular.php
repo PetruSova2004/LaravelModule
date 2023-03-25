@@ -13,6 +13,7 @@ return [
 
     'modules' => [ // указываем все модули которые Laravel должен обойти и считать маршруты каждого модуля
         'Admin' => [
+            'SubCategory',
             'Product',
             'Index',
             'Localization',

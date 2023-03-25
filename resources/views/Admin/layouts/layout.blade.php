@@ -227,6 +227,30 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-archive"></i>
+                            <p>
+                                Под Категории
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href={{route('admin.sub-categories.index')}} class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Список Под-Категорий</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href={{route('admin.sub-categories.create')}} class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Новая Под-Категория</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

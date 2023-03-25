@@ -73,8 +73,8 @@ class ProductController extends Controller
     {
         $subCategories = ReceivingService::getJsonAllSubCategories();
 
-        $binder_ru = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
-        $ru_product = DB::table('products_ru')->where('id', $binder_ru->ru_product_id)->first();
+        $binder = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
+        $ru_product = DB::table('products_ru')->where('id', $binder->ru_product_id)->first();
 //        dd($ru_product);
 
         return view('Admin.Product.edit', compact('subCategories', 'product', 'ru_product'));

@@ -31,33 +31,36 @@
                         <div class="card-body">
                             <a class="btn btn-primary mb-3" href={{route('admin.categories.create')}} >Добавить
                                 Категорию</a>
-                            @if (count($categories))
+                            @if (count($subCategories))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover text-nowrap">
                                         <thead>
                                         <tr>
                                             <th style="width: 30px">#</th>
                                             <th>Наименование</th>
-                                            <th>Кол-во Под Категорий</th>
                                             <th>Слуг</th>
+                                            <th>Кол-во Под Продуктов</th>
+                                            <th>Ид Категории</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($categories as $category)
+                                        @foreach($subCategories as $subCategory)
                                             <tr>
-                                                <td>{{ $category->id }}</td>
-                                                <td>{{ $category->title }}</td>
-                                                <td>{{$category->subcategories_count}}</td>
-                                                <td>{{$category->slug}}</td>
+                                                <td>{{$subCategory->id}}</td>
+                                                <td>{{$subCategory->title}}</td>
+                                                <td>{{$subCategory->slug}}</td>
+                                                <td>{{$subCategory->products_count}}</td>
+                                                <td>{{$subCategory->category_id}}</td>
+
                                                 <td>
                                                     <a class="btn btn-info btn-sm float-left mr-1"
-                                                       href={{route('admin.categories.edit', ['category' => $category->id])}}>
+                                                       href={{route('admin.sub-categories.edit', ['subCategory' => $subCategory->id])}}>
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
                                                     <form
-                                                        action={{route('admin.categories.delete', ['category' => $category->id])}}
+                                                        action={{route('admin.sub-categories.delete', ['subCategory' => $subCategory->id])}}
                                                         method="post" class="float-left">
                                                         @csrf
                                                         @method('DELETE')

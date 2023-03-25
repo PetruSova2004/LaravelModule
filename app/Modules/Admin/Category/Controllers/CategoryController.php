@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Category\Controllers;
 
 use App\Facades\ReceivingService;
+use App\Modules\Admin\Category\Services\AdminCategoryService;
 use App\Modules\Pub\Category\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
+    public function __construct(AdminCategoryService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,27 +47,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'title_ru' => 'required',
-            'slug' => 'required',
-            'slug_ru' => 'required',
-        ]);
-
-        if (Category::create([
-                'title' => $request->title,
-                'slug' => $request->slug,
-                'subcategories_count' => 0,
-            ]) &&
-            DB::table('categories_ru')->insert([
-                'title' => $request->title_ru,
-                'slug' => $request->slug_ru,
-                'subcategories_count' => 0,
-            ])) {
-            return redirect()->route('admin.categories.index')->with('success', 'Product was added with success');
-        } else {
-            return redirect()->back()->with('error', 'Something goes wrong');
-        }
+        return $this->service->storeCategory($request);
     }
 
     /**
@@ -82,7 +69,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $binder = DB::table('binder_category_en_ru')->where('en_category_id', $category->id)->first();
+        $ru_category = DB::table('categories_ru')->where('id', $binder->ru_category_id)->first();
+//        dd($ru_category->title);
+
+        return view('Admin.Category.edit', compact('category', 'ru_category'));
     }
 
     /**
@@ -94,7 +85,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        return $this->service->updateCategory($request, $category);
     }
 
     /**
@@ -105,6 +96,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        return $this->service->destroyCategory($category);
     }
 }

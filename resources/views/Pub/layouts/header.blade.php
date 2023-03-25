@@ -81,6 +81,7 @@
                         <p class="mb-0 font-13">@lang('header.call')</p>
                         <h5 class="mb-0">+011 5827918</h5>
                         @auth()
+                            @php($user = \Illuminate\Support\Facades\Auth::user())
                             <h4>{{$user->firstname}}</h4>
                         @endauth
 

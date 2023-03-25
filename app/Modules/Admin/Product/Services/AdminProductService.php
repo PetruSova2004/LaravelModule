@@ -10,7 +10,6 @@ class AdminProductService
 
     public function storeProduct($request)
     {
-
         $request->validate([
             'title' => 'required',
             'descr' => 'required|min:10',
@@ -79,7 +78,7 @@ class AdminProductService
         ]);
 
         $path = $request->file('image')->store('', ['disk' => 'new_products']);
-        $binder_ru = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
+        $binder = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
 
         if (
             $product->update([
@@ -89,7 +88,7 @@ class AdminProductService
                 'price' => $request->price,
                 'subcategory_id' => $request->sub_category,
             ])
-            && DB::table('products_ru')->where('id', $binder_ru->ru_product_id)->update([
+            && DB::table('products_ru')->where('id', $binder->ru_product_id)->update([
                 'title' => $request->title_ru,
                 'description' => $request->descr_ru,
                 'img' => "assets/images/products/" . $path,
