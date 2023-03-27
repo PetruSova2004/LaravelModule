@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Category\Services;
 
 use App\Modules\Pub\Category\Models\Category;
+use App\Modules\Pub\SubCategory\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
 
 class AdminCategoryService
@@ -56,7 +57,7 @@ class AdminCategoryService
         $ru = DB::table('categories_ru')->delete($binder_product->ru_category_id);
         $en = Category::destroy($category->id);
 
-        if ($binder || $ru || $en) {
+        if ($binder && $ru && $en) {
             return redirect()->route('admin.categories.index')->with('success', 'Категория была удаленна');
         } else {
             return redirect()->back()->with('error', 'Невозможно удалить продукт');
@@ -90,5 +91,38 @@ class AdminCategoryService
         } else {
             return redirect()->back()->with('error', 'Something goes wrong');
         }
+    }
+
+    public function subCategoryCount()
+    {
+        $subCategories = SubCategory::all();
+        $categories = Category::all();
+        $ru_subCategories = DB::table('sub_categories_ru')->get('*');
+        $ru_Categories = DB::table('categories_ru')->get('*');
+
+        foreach ($categories as $category) {
+            $category->update([
+                'subcategories_count' => 0,
+            ]);
+            foreach ($subCategories as $subCategory) {
+                if ($category->id == $subCategory->category_id) {
+                    $category->increment('subcategories_count', 1);
+                }
+            }
+        }
+
+        foreach ($ru_Categories as $ru_Category) {
+            DB::table('categories_ru')->where('id', $ru_Category->id)->update([
+                'subcategories_count' => 0,
+            ]);
+
+            foreach ($ru_subCategories as $subCategory) {
+                if ($ru_Category->id == $subCategory->category_id) {
+                    DB::table('categories_ru')->where('id', $ru_Category->id)->increment('subcategories_count', 1);
+                }
+            }
+        }
+
+
     }
 }

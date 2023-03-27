@@ -11,6 +11,7 @@ class SubCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['products_count', 'title', 'slug', 'category_id',];
 //    protected $primaryKey = 'id'; // Тут была пустая строка
 
     public function category()

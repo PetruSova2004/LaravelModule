@@ -25,12 +25,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Список категорий</h3>
+                            <h3 class="card-title">Список Под-Категорий</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a class="btn btn-primary mb-3" href={{route('admin.categories.create')}} >Добавить
-                                Категорию</a>
+                            <a class="btn btn-primary mb-3" href={{route('admin.sub-categories.create')}} >Добавить
+                                Под-Категорию</a>
                             @if (count($subCategories))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover text-nowrap">

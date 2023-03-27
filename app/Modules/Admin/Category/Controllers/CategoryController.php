@@ -70,10 +70,9 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $binder = DB::table('binder_category_en_ru')->where('en_category_id', $category->id)->first();
-        $ru_category = DB::table('categories_ru')->where('id', $binder->ru_category_id)->first();
-//        dd($ru_category->title);
+        $ru_subCategory = DB::table('categories_ru')->where('id', $binder->ru_category_id)->first();
 
-        return view('Admin.Category.edit', compact('category', 'ru_category'));
+        return view('Admin.Category.edit', compact('category', 'ru_subCategory'));
     }
 
     /**

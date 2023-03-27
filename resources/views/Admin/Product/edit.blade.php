@@ -38,14 +38,14 @@
                                     <label for="title">Название для En</label>
                                     <input type="text" name="title"
                                            class="form-control @error('title') is-invalid @enderror" id="title"
-                                           placeholder="Название" value={{$product->title}}>
+                                           placeholder="Название" value="{{$product->title}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="title_ru">Название для Ru</label>
                                     <input type="text" name="title_ru"
                                            class="form-control @error('title_ru') is-invalid @enderror" id="title_ru"
-                                           placeholder="Название для Ru" value={{$ru_product->title}}>
+                                           placeholder="Название для Ru" value="{{$ru_product->title}}">
                                 </div>
 
                                 <div class="form-group">
@@ -53,7 +53,7 @@
                                     <input type="text" name="descr"
                                            class="form-control @error('descr') is-invalid @enderror"
                                            id="descr"
-                                           placeholder="Описание" value={{$product->description}}>
+                                           placeholder="Описание" value="{{$product->description}}">
                                 </div>
 
                                 <div class="form-group">
@@ -61,7 +61,7 @@
                                     <input type="text" name="descr_ru"
                                            class="form-control @error('descr_ru') is-invalid @enderror"
                                            id="descr_ru"
-                                           placeholder="Описание для Ru" value={{$ru_product->description}}>
+                                           placeholder="Описание для Ru" value="{{$ru_product->description}}">
                                 </div>
 
                                 <div class="form-group">
@@ -69,7 +69,7 @@
                                     <select class="form-control @error('sub_category') is-invalid @enderror"
                                             id="sub_category" name="sub_category">
                                         @foreach($subCategories as $subCategory)
-                                            <option value={{$subCategory->id}}>
+                                            <option value="{{$subCategory->id}}">
                                                 {{$subCategory->title}}</option>
                                         @endforeach
                                     </select>
@@ -79,7 +79,7 @@
                                     <label for="price">Цена</label>
                                     <input type="text" name="price"
                                            class="form-control @error('price') is-invalid @enderror" id="price"
-                                           placeholder="Цена" value={{$product->price}}>
+                                           placeholder="Цена" value="{{$product->price}}">
                                 </div>
 
                                 <div class="form-group">
@@ -87,7 +87,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="image" id="image"
-                                                   class="custom-file-input" value={{$product->img}}>
+                                                   class="custom-file-input" value="{{$product->img}}">
                                             <label class="custom-file-label" for="image">Choose file</label>
                                         </div>
                                     </div>

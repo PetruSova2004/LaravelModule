@@ -202,6 +202,8 @@ return [
 
         \App\Providers\IndexServiceProvider::class,
         \App\Providers\ReceivingProvider::class,
+        \App\Providers\AdminSubcategory::class,
+        \App\Providers\AdminCategory::class,
 
 
 
@@ -224,6 +226,8 @@ return [
 
         'IndexService' => App\Facades\IndexService::class,
         'ReceivingService' => App\Facades\ReceivingService::class,
+        'SubCategoryService' => App\Facades\SubCategoryService::class,
+        'CategoryService' => App\Facades\CategoryService::class,
 
     ])->toArray(),
 

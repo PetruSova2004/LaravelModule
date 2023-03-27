@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Product\Controllers;
 
 use App\Facades\ReceivingService;
+use App\Facades\SubCategoryService;
 use App\Modules\Admin\Product\Services\AdminProductService;
 use App\Modules\Pub\Product\Models\Product;
 use Illuminate\Http\Request;
@@ -100,6 +101,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        SubCategoryService::productsCount();
         return $this->service->destroyProduct($product);
     }
 }
