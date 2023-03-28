@@ -80,7 +80,7 @@ class AdminCategoryService
                 'title' => $request->title,
                 'slug' => $request->slug,
                 'subcategories_count' => 0
-            ]) ||
+            ]) &&
             DB::table('categories_ru')->where('id', $binder->ru_category_id)->update([
                 'title' => $request->title_ru,
                 'slug' => $request->slug_ru,

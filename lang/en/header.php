@@ -11,6 +11,7 @@ return [
     'help' => 'Help & FAQs',
     'call' => 'CALL US NOW',
     'home' => 'HOME',
+    'products' => 'PRODUCTS',
     'categories' => 'CATEGORIES',
     'shop' => 'SHOP',
     'my_account' => 'MY ACCOUNT',

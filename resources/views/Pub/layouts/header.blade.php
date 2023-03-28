@@ -182,6 +182,8 @@
                 <ul class="navbar-nav">
                     <li class="nav-item active"><a class="nav-link" href={{route('indices.index')}}>@lang('header.home') </a>
                     </li>
+                    <li class="nav-item active"><a class="nav-link" href={{route('products.index')}}>@lang('header.products') </a>
+                    </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                                                      data-bs-toggle="dropdown">@lang('header.categories') <i
                                 class='bx bx-chevron-down'></i></a>
