@@ -48,7 +48,7 @@
 
                                         <div class="card-body">
                                             <div class="product-info">
-                                                <a href="product-details.blade.php">
+                                                <a href="{{route('products.read', ['product' => $product->id])}}">
                                                     <img src={{$product->img}} class="card-img-top" alt="...">
                                                 </a>
 
@@ -97,11 +97,11 @@
                                                                     <i
                                                                         class='bx bxs-cart-add'></i>Add to Cart</a>
                                                             @endauth
-                                                            <a
-                                                                href="javascript:;" class="btn btn-link btn-ecomm"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#QuickViewProduct"><i
-                                                                    class='bx bx-zoom-in'></i>Quick View</a>
+{{--                                                            <a--}}
+{{--                                                                href="{{route('products.read', ['product' => $product->id])}}" class="btn btn-link btn-ecomm"--}}
+{{--                                                                data-bs-toggle="modal"--}}
+{{--                                                                data-bs-target="#QuickViewProduct"><i--}}
+{{--                                                                    class='bx bx-zoom-in'></i>Quick View</a>--}}
                                                         </div>
                                                     </div>
                                             </div>

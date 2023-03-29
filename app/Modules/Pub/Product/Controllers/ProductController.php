@@ -3,15 +3,25 @@
 namespace App\Modules\Pub\Product\Controllers;
 
 use App\Facades\ReceivingService;
+use App\Modules\Pub\Product\Services\ProductService;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Pub\Product\Models\Product;
 use App\Modules\Pub\SubCategory\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use function Sodium\increment;
 
 
 class ProductController extends Controller
 {
+    private $service;
+
+    public function __construct(ProductService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +65,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $this->service->incrementViews($product);
+        $product = ReceivingService::getJsonOneProduct($product);
+
+        return view('Pub.product-details', compact('product'));
     }
 
     /**

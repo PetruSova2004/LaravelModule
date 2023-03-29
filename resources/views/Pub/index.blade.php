@@ -241,7 +241,9 @@
                                                     @endif
                                                 @endforeach
                                                 <a href="javascript:;">
-                                                    <h6 class="product-name mb-2">{{$product->title}}</h6>
+                                                    <h6 class="product-name mb-2">{{$product->title}}</h6> <br>
+                                                    <p class="product-catergory font-13 mb-1">Views:{{$product->views}}</p>
+
                                                 </a>
                                                 <div class="d-flex align-items-center">
 

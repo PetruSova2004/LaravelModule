@@ -107,14 +107,14 @@ class ReceivingService
 
     private function getFeaturedProductsEn()
     {
-        $products = Product::where('id', '<=', 5)->get('*');
+        $products = Product::orderByDesc('views')->take(4)->get();
 
         return $products;
     }
 
     private function getFeaturedProductsRu()
     {
-        $products = DB::table('products_ru')->where('id', '<=', 5)->get('*');
+        $products = DB::table('products_ru')->orderByDesc('views')->take(4)->get();
 
         return $products;
     }
@@ -227,6 +227,37 @@ class ReceivingService
             'items' => $result
         ]));
         // dd($productJson);
+
+        $products = $productsJson->data->items;
+
+        return $products;
+    }
+
+
+    private function getOneProductEn($product)
+    {
+        $products = Product::where('id', $product->id)->first();
+        return $products;
+    }
+
+    private function getOneProductRu($product)
+    {
+        $binder = DB::table('binder_product_en_ru')->where('en_product_id', $product->id)->first();
+        $products = DB::table('products_ru')->where('id', $binder->ru_product_id)->first();
+        return $products;
+    }
+
+    public function getJsonOneProduct($product)
+    {
+        if (App::getLocale() == 'en') {
+            $result = $this->getOneProductEn($product);
+        } elseif (App::getLocale() == 'ru') {
+            $result = $this->getOneProductRu($product);
+        }
+
+        $productsJson = json_decode(ResponseServise::sendJsonData(true, 200, [], [
+            'items' => $result
+        ]));
 
         $products = $productsJson->data->items;
 
