@@ -26,6 +26,10 @@ return [
         ],
 
         'Pub' => [
+            'SubCategoryRu',
+            'CategoryRu',
+            'ProductsRu',
+            'Test',
             'Localization',
             'Dashboard',
             'Contact',
@@ -38,7 +42,6 @@ return [
             'Register',
             'Auth',
             'Index',
-
         ],
     ]
 ];
